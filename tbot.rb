@@ -59,8 +59,7 @@ begin
       liked_targets_log_file.write("#{target_id}\n")
       tinder_connexion.get 'like/' + target_id
       liked_targets_count += 1
-
-      p "Liked #{target['name']}."
+      puts "Liked #{target['name']}."
     end
     recommended_targets = JSON.parse(tinder_connexion.post('user/recs').body)
   end
