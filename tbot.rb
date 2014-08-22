@@ -66,7 +66,7 @@ def like_people(tinder_connexion)
       recommended_people_set = get_new_recommended_people_set(tinder_connexion)
     end
   ensure
-    puts "\nLiked #{liked_person_count} target(s)."
+    puts "\nLiked #{liked_person_count} people."
     liked_people_log_file.close if liked_people_log_file
   end
 end
