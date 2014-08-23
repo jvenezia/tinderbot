@@ -1,6 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem 'faraday'
-gem 'faraday_middleware'
-gem 'watir-webdriver'
-gem 'json'
+# Specify your gem's dependencies in tbot.gemspec
+gemspec

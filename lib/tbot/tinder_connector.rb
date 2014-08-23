@@ -1,4 +1,4 @@
-require_relative 'utils'
+require 'utils'
 
 class TinderConnector
   LIKED_PEOPLE_LOG_PATH = 'liked_people.txt'

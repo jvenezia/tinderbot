@@ -1,3 +1,12 @@
+PATH
+  remote: .
+  specs:
+    tbot (0.0.1)
+      faraday
+      faraday_middleware
+      json
+      watir-webdriver
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -11,6 +20,7 @@ GEM
     json (1.8.1)
     multi_json (1.10.1)
     multipart-post (2.0.0)
+    rake (10.3.2)
     rubyzip (1.1.6)
     selenium-webdriver (2.42.0)
       childprocess (>= 0.5.0)
@@ -25,7 +35,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  faraday
-  faraday_middleware
-  json
-  watir-webdriver
+  bundler (~> 1.6)
+  rake
+  tbot!
