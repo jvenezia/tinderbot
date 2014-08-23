@@ -1,11 +1,11 @@
-module Tbot
+module Tinderbot
   module Cli
     class Application < Thor
       desc 'like', 'Automatically like people.'
 
       def like
         puts 'Connecting to tinder...'
-        tinder = Tbot::Tinder.new
+        tinder = Tinderbot::Tinder.new
 
         puts 'Starting likes...'
         tinder.like_recommended_people

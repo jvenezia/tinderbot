@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in tbot.gemspec
+# Specify your gem's dependencies in tinderbot.gemspec
 gemspec

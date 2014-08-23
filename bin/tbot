@@ -1,5 +1,0 @@
-#!/usr/bin/env ruby
-
-require 'tbot'
-
-Tbot::Cli::Application.start(ARGV)

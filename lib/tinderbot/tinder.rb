@@ -1,4 +1,4 @@
-module Tbot
+module Tinderbot
   class Tinder
     LIKED_PEOPLE_LOG_PATH = 'liked_people.log'
     TINDER_API_URL = 'https://api.gotinder.com'
@@ -8,7 +8,7 @@ module Tbot
 
     def initialize
       build_connection
-      facebook_authentication_token, facebook_user_id = Tbot::Facebook.get_credentials
+      facebook_authentication_token, facebook_user_id = Tinderbot::Facebook.get_credentials
       sign_in(facebook_authentication_token, facebook_user_id)
       @liked_people_log_file = File.open(LIKED_PEOPLE_LOG_PATH, 'a')
     end
