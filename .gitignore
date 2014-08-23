@@ -19,8 +19,8 @@ tmp
 *.so
 *.o
 *.a
+*.log
 mkmf.log
 
 facebook_credentials.json
 .idea
-liked_people.txt
