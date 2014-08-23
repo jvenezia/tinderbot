@@ -2,5 +2,4 @@
 
 require 'tbot'
 
-Tbot::Application.start(ARGV)
-
+Tbot::Cli::Application.start(ARGV)
