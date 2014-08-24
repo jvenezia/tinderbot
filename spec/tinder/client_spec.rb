@@ -10,13 +10,47 @@ describe Tinderbot::Tinder::Client do
     it { expect(connection.headers[:user_agent]).to eq(Tinderbot::Tinder::Client::CONNECTION_USER_AGENT) }
   end
 
-  describe '.get_recommended_people' do
-    let(:recommended_people_response) { open('spec/fixtures/recommended_people.json').read }
+  describe '.me' do
+    let(:user_response) { open('spec/fixtures/recommended_users.json').read }
+
+    before { expect(connection).to receive(:get).with('profile').and_return(connection) }
+    before { expect(connection).to receive(:body).and_return(user_response) }
+
+    subject { tinder_client.me }
+
+    it { should eq JSON.parse(user_response) }
+  end
+
+  describe '.user' do
+    let(:user_id) { 'user_id' }
+    let(:user_response) { open('spec/fixtures/user.json').read }
+
+    before { expect(connection).to receive(:get).with("user/#{user_id}").and_return(connection) }
+    before { expect(connection).to receive(:body).and_return(user_response) }
+
+    subject { tinder_client.user user_id }
+
+    it { should eq JSON.parse(user_response) }
+  end
+
+  describe '.updates' do
+    let(:updates_response) { open('spec/fixtures/updates.json').read }
+
+    before { expect(connection).to receive(:get).with('updates').and_return(connection) }
+    before { expect(connection).to receive(:body).and_return(updates_response) }
+
+    subject { tinder_client.updates }
+
+    it { should eq JSON.parse(updates_response) }
+  end
+
+  describe '.recommended_users' do
+    let(:recommended_people_response) { open('spec/fixtures/recommended_users.json').read }
 
     before { expect(connection).to receive(:post).with('user/recs').and_return(connection) }
     before { expect(connection).to receive(:body).and_return(recommended_people_response) }
 
-    subject { tinder_client.get_recommended_people }
+    subject { tinder_client.recommended_users }
 
     it { should eq JSON.parse(recommended_people_response)['results'] }
   end

@@ -8,11 +8,11 @@ module Tinderbot
       end
 
       def like_recommended_people
-        recommended_people = @client.get_recommended_people
+        recommended_people = @client.recommended_users
         while recommended_people
           recommended_people_ids = recommended_people.map {|r| r['_id']}
           @client.like_all recommended_people_ids
-          recommended_people = @client.get_recommended_people
+          recommended_people = @client.recommended_users
         end
       end
     end

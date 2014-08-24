@@ -19,7 +19,19 @@ module Tinderbot
         @connection.headers['X-Auth-Token'] = authentication_token
       end
 
-      def get_recommended_people
+      def me
+        JSON.parse(@connection.get('profile').body)
+      end
+
+      def user(user_id)
+        JSON.parse(@connection.get("user/#{user_id}").body)
+      end
+
+      def updates
+        JSON.parse(@connection.get('updates').body)
+      end
+
+      def recommended_users
         JSON.parse(@connection.post('user/recs').body)['results']
       end
 
