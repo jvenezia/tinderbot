@@ -86,7 +86,7 @@ Commands:
 ```
 
 ## Contributing
-Feel free to contribute !
+Feel free to contribute!
 
 1. Fork it ( https://github.com/jvenezia/tinderbot/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
