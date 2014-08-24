@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe Tinderbot::Tinder do
-  let(:tinder_connector) { Tinderbot::Tinder.new }
-  before { Tinderbot::Facebook.should_receive(:get_credentials) }
+  let(:tinder_connector) { Tinderbot::Tinder.new('', '') }
   before { Tinderbot::Tinder.any_instance.should_receive(:sign_in) }
 
   describe '.connection' do

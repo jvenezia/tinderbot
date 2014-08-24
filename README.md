@@ -1,5 +1,9 @@
 # Tinderbot
 
+![Build](https://travis-ci.org/jvenezia/tinderbot.svg?branch=master)
+
+## Description
+
 Use tinder in command line.
 
 ## Contributing

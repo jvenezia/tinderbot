@@ -6,9 +6,8 @@ module Tinderbot
 
     attr_accessor :connection, :liked_people_log_file
 
-    def initialize
+    def initialize(facebook_authentication_token, facebook_user_id, options = {})
       build_connection
-      facebook_authentication_token, facebook_user_id = Tinderbot::Facebook.get_credentials
       sign_in(facebook_authentication_token, facebook_user_id)
       @liked_people_log_file = File.open(LIKED_PEOPLE_LOG_PATH, 'a')
     end
