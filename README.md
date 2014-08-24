@@ -95,5 +95,5 @@ Feel free to contribute!
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
 
-## Licence
+## License
 Released under the MIT License, which can be found in `LICENSE.txt`.
