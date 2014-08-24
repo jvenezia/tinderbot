@@ -2,13 +2,22 @@
 
 ![Build](https://travis-ci.org/jvenezia/tinderbot.svg?branch=master)
 
-## Description
-
 Tinderbot is a ruby wrapper for the Tinder API.
 
 It also contains a bot which automatically like recommended people.
 
 It can be used in ruby, or in command line.
+
+## Installation
+
+Add this line to your application's Gemfile:
+
+    gem 'tinderbot'
+
+Or install it yourself as:
+
+    $ gem install tinderbot
+
 
 ## Getting your facebook authentication token
 
