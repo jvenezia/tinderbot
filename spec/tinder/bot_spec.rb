@@ -15,7 +15,7 @@ describe Tinderbot::Tinder::Bot do
 
     context 'there is no recommended people' do
       before { Tinderbot::Tinder::Client.any_instance.should_receive(:get_recommended_people) { nil } }
-      before { Tinderbot::Tinder::Client.should_not_receive(:like_people) }
+      before { Tinderbot::Tinder::Client.should_not_receive(:like_all) }
 
       it { tinder_bot.like_recommended_people }
     end
@@ -24,7 +24,7 @@ describe Tinderbot::Tinder::Bot do
       before { Tinderbot::Tinder::Client.any_instance.should_receive(:get_recommended_people) { recommended_people_results } }
       before { Tinderbot::Tinder::Client.any_instance.should_receive(:get_recommended_people) { nil } }
 
-      before { Tinderbot::Tinder::Client.any_instance.should_receive(:like_people).with(recommended_people_results.map { |r| r['_id'] }).exactly(1).times }
+      before { Tinderbot::Tinder::Client.any_instance.should_receive(:like_all).with(recommended_people_results.map { |r| r['_id'] }).exactly(1).times }
 
       it { tinder_bot.like_recommended_people }
     end
@@ -34,7 +34,7 @@ describe Tinderbot::Tinder::Bot do
       before { Tinderbot::Tinder::Client.any_instance.should_receive(:get_recommended_people) { recommended_people_results } }
       before { Tinderbot::Tinder::Client.any_instance.should_receive(:get_recommended_people) { nil } }
 
-      before { Tinderbot::Tinder::Client.any_instance.should_receive(:like_people).with(recommended_people_results.map { |r| r['_id'] }).exactly(2).times }
+      before { Tinderbot::Tinder::Client.any_instance.should_receive(:like_all).with(recommended_people_results.map { |r| r['_id'] }).exactly(2).times }
 
       it { tinder_bot.like_recommended_people }
     end

@@ -15,13 +15,20 @@ module Tinderbot
         JSON.parse(@connection.post('user/recs').body)['results']
       end
 
-      def like_person(person_id)
+      def like(person_id)
         @connection.get "like/#{person_id}"
-        puts person_id
       end
 
-      def like_people(people_ids)
-        people_ids.each { |person_id| like_person person_id }
+      def like_all(people_ids)
+        people_ids.each { |person_id| like person_id }
+      end
+
+      def dislike(person_id)
+        @connection.get "pass/#{person_id}"
+      end
+
+      def dislike_all(people_ids)
+        people_ids.each { |person_id| dislike person_id }
       end
 
       protected
