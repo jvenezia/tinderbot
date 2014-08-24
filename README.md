@@ -4,7 +4,13 @@
 
 ## Description
 
-Use tinder in command line.
+**Tinderbot is still under heavy development...**
+
+Tinderbot is a ruby wrapper for the Tinder API.
+
+It also contains a bot which automatically like recommended people.
+
+It can be used in ruby, or in command line.
 
 ## Contributing
 
