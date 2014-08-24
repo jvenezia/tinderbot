@@ -1,6 +1,7 @@
 # Tinderbot
 
 [![Build](https://travis-ci.org/jvenezia/tinderbot.svg?branch=master)](https://travis-ci.org/jvenezia/tinderbot)
+[![Gem Version](https://badge.fury.io/rb/tinderbot.svg)](http://badge.fury.io/rb/tinderbot)
 
 Tinderbot is a ruby wrapper for the Tinder API.
 
