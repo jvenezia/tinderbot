@@ -75,15 +75,15 @@ You can interact with Tinderbot with command lines.
 ```
 > tinderbot
 Commands:
-  tinderbot autolike              # Automatically like recommended people. Stops when there is no more people to like.
-  tinderbot dislike USER_ID       # Dislike user.
+  tinderbot autolike              # Automatically like recommended people (Stops when there is no more people to like)
+  tinderbot dislike USER_ID       # Dislike user
   tinderbot help [COMMAND]        # Describe available commands or one specific command
-  tinderbot like USER_ID          # Like user.
-  tinderbot me                    # Get your profile data.
-  tinderbot recommended           # Get recommended users.
-  tinderbot send USER_ID MESSAGE  # Sends message to user
+  tinderbot like USER_ID          # Like user
+  tinderbot me                    # Get your profile data
+  tinderbot recommended           # Get recommended users
+  tinderbot send USER_ID MESSAGE  # Send message to user
   tinderbot updates               # Get updates
-  tinderbot user USER_ID          # Get user profile data.
+  tinderbot user USER_ID          # Get user profile data
 ```
 
 ## Contributing

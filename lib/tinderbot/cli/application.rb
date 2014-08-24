@@ -5,13 +5,13 @@ module Tinderbot
     class Application < Thor
       FACEBOOK_CREDENTIALS_FILE = 'facebook_credentials.pstore'
 
-      desc 'me', 'Get your profile data.'
+      desc 'me', 'Get your profile data'
       def me
         tinder_client = sign_in
         puts tinder_client.me
       end
 
-      desc 'user USER_ID', 'Get user profile data.'
+      desc 'user USER_ID', 'Get user profile data'
       def user(user_id)
         tinder_client = sign_in
         puts tinder_client.user user_id
@@ -23,19 +23,19 @@ module Tinderbot
         puts tinder_client.updates
       end
 
-      desc 'recommended', 'Get recommended users.'
+      desc 'recommended', 'Get recommended users'
       def recommended
         tinder_client = sign_in
         puts tinder_client.recommended_users
       end
 
-      desc 'like USER_ID', 'Like user.'
+      desc 'like USER_ID', 'Like user'
       def like(user_id)
         tinder_client = sign_in
         puts tinder_client.like user_id
       end
 
-      desc 'dislike USER_ID', 'Dislike user.'
+      desc 'dislike USER_ID', 'Dislike user'
       def dislike(user_id)
         tinder_client = sign_in
         puts tinder_client.dislike user_id
@@ -47,7 +47,7 @@ module Tinderbot
         puts tinder_client.send_message user_id, message
       end
 
-      desc 'autolike', 'Automatically like recommended people. Stops when there is no more people to like.'
+      desc 'autolike', 'Automatically like recommended people (Stops when there is no more people to like)'
       def autolike
         tinder_client = sign_in
 
