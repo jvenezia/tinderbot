@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 describe Tinderbot::Tinder::Bot do
-  let(:tinder_client) { Tinderbot::Tinder::Client.new('', '') }
-  before { expect_any_instance_of(Tinderbot::Tinder::Client).to receive(:sign_in) }
+  let(:tinder_client) { Tinderbot::Tinder::Client.new }
   let(:tinder_bot) { Tinderbot::Tinder::Bot.new(tinder_client) }
 
   describe 'client' do

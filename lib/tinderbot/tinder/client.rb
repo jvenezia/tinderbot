@@ -6,9 +6,17 @@ module Tinderbot
 
       attr_accessor :connection
 
-      def initialize(facebook_authentication_token, facebook_user_id)
+      def initialize
         build_connection
-        sign_in(facebook_authentication_token, facebook_user_id)
+      end
+
+      def get_authentication_token(facebook_authentication_token, facebook_user_id)
+        JSON.parse(@connection.post('/auth', {facebook_token: facebook_authentication_token, facebook_id: facebook_user_id}).body)['token']
+      end
+
+      def sign_in(authentication_token)
+        @connection.token_auth(authentication_token)
+        @connection.headers['X-Auth-Token'] = authentication_token
       end
 
       def get_recommended_people
@@ -43,13 +51,6 @@ module Tinderbot
           faraday.adapter Faraday.default_adapter
         end
         @connection.headers[:user_agent] = CONNECTION_USER_AGENT
-      end
-
-      def sign_in(facebook_authentication_token, facebook_user_id)
-        authentication_response = JSON.parse(@connection.post('/auth', {facebook_token: facebook_authentication_token, facebook_id: facebook_user_id}).body)
-        tinder_authentication_token = authentication_response['token']
-        @connection.token_auth(tinder_authentication_token)
-        @connection.headers['X-Auth-Token'] = tinder_authentication_token
       end
     end
   end

@@ -22,3 +22,4 @@ tmp
 *.log
 mkmf.log
 .idea
+facebook_credentials.pstore
