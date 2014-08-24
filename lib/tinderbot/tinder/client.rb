@@ -4,9 +4,10 @@ module Tinderbot
       TINDER_API_URL = 'https://api.gotinder.com'
       CONNECTION_USER_AGENT = 'Tinder/3.0.4 (iPhone; iOS 7.1; Scale/2.00)'
 
-      attr_accessor :connection
+      attr_accessor :connection, :logs_enabled
 
-      def initialize
+      def initialize(options = {})
+        @logs_enabled = options[:logs_enabled]
         build_connection
       end
 
@@ -37,6 +38,7 @@ module Tinderbot
 
       def like(user_id)
         @connection.get "like/#{user_id}"
+        puts "Liked #{user_id}" if @logs_enabled
       end
 
       def like_all(user_ids)
@@ -45,6 +47,7 @@ module Tinderbot
 
       def dislike(user_id)
         @connection.get "pass/#{user_id}"
+        puts "Disliked #{user_id}" if @logs_enabled
       end
 
       def dislike_all(user_ids)
