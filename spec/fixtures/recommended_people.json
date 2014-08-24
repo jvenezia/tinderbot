@@ -1,12 +1,12 @@
 {
 	"results": [
 		{
-			"_id": "person_1_id",
-			"name": "person_1"
+			"_id": "user_1_id",
+			"name": "user_1"
 		},
 		{
-			"_id": "person_2_id",
-			"name": "person_2"
+			"_id": "user_2_id",
+			"name": "user_2"
 		}
 	]
 }

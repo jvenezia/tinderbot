@@ -23,11 +23,11 @@ describe Tinderbot::Tinder::Client do
   end
 
   describe '.like' do
-    let(:person_id) { 'person_id' }
+    let(:user_id) { 'user_id' }
 
-    before { connection.should_receive(:get).with("like/#{person_id}") }
+    before { connection.should_receive(:get).with("like/#{user_id}") }
 
-    it { tinder_client.like person_id }
+    it { tinder_client.like user_id }
   end
 
   describe '.like_all' do
@@ -40,20 +40,20 @@ describe Tinderbot::Tinder::Client do
     end
 
     context 'there two people' do
-      let(:people_ids) { %w(person_1_id person_2_id) }
+      let(:people_ids) { %w(user_1_id user_2_id) }
 
-      before { people_ids.each { |person_id| Tinderbot::Tinder::Client.any_instance.should_receive(:like).with(person_id) } }
+      before { people_ids.each { |user_id| Tinderbot::Tinder::Client.any_instance.should_receive(:like).with(user_id) } }
 
       it { tinder_client.like_all people_ids }
     end
   end
 
   describe '.dislike' do
-    let(:person_id) { 'person_id' }
+    let(:user_id) { 'user_id' }
 
-    before { connection.should_receive(:get).with("pass/#{person_id}") }
+    before { connection.should_receive(:get).with("pass/#{user_id}") }
 
-    it { tinder_client.dislike person_id }
+    it { tinder_client.dislike user_id }
   end
 
   describe '.dislike_all' do
@@ -66,11 +66,20 @@ describe Tinderbot::Tinder::Client do
     end
 
     context 'there two people' do
-      let(:people_ids) { %w(person_1_id person_2_id) }
+      let(:people_ids) { %w(user_1_id user_2_id) }
 
-      before { people_ids.each { |person_id| Tinderbot::Tinder::Client.any_instance.should_receive(:dislike).with(person_id) } }
+      before { people_ids.each { |user_id| Tinderbot::Tinder::Client.any_instance.should_receive(:dislike).with(user_id) } }
 
       it { tinder_client.dislike_all people_ids }
     end
+  end
+
+  describe '.send_message' do
+    let(:user_id) { 'user_id' }
+    let(:message) { 'message' }
+
+    before { connection.should_receive(:post).with("user/matches/#{user_id}", {message: message}) }
+
+    it { tinder_client.send_message user_id, message }
   end
 end
