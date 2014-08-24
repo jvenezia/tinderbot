@@ -36,7 +36,7 @@ describe Tinderbot::Tinder::Client do
   describe '.updates' do
     let(:updates_response) { open('spec/fixtures/updates.json').read }
 
-    before { expect(connection).to receive(:get).with('updates').and_return(connection) }
+    before { expect(connection).to receive(:post).with('updates').and_return(connection) }
     before { expect(connection).to receive(:body).and_return(updates_response) }
 
     subject { tinder_client.updates }

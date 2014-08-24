@@ -29,7 +29,7 @@ module Tinderbot
       end
 
       def updates
-        JSON.parse(@connection.get('updates').body)
+        JSON.parse(@connection.post('updates').body)
       end
 
       def recommended_users
