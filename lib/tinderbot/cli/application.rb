@@ -5,11 +5,51 @@ module Tinderbot
     class Application < Thor
       FACEBOOK_CREDENTIALS_FILE = 'facebook_credentials.pstore'
 
-      desc 'like', 'Automatically like people.'
-      def like
-        puts 'Connecting to tinder...'
-        tinder_client = Tinderbot::Tinder::Client.new
-        sign_in(tinder_client)
+      desc 'me', 'Get your profile data.'
+      def me
+        tinder_client = sign_in
+        puts tinder_client.me
+      end
+
+      desc 'user USER_ID', 'Get user profile data.'
+      def user(user_id)
+        tinder_client = sign_in
+        puts tinder_client.user user_id
+      end
+
+      desc 'updates', 'Get updates'
+      def updates
+        tinder_client = sign_in
+        puts tinder_client.updates
+      end
+
+      desc 'recommended', 'Get recommended users.'
+      def recommended
+        tinder_client = sign_in
+        puts tinder_client.recommended_users
+      end
+
+      desc 'like USER_ID', 'Like user.'
+      def like(user_id)
+        tinder_client = sign_in
+        puts tinder_client.like user_id
+      end
+
+      desc 'dislike USER_ID', 'Dislike user.'
+      def dislike(user_id)
+        tinder_client = sign_in
+        puts tinder_client.dislike user_id
+      end
+
+      desc 'send USER_ID MESSAGE', 'Sends message to user'
+      def send(user_id, message)
+        tinder_client = sign_in
+        puts tinder_client.send_message user_id, message
+      end
+
+      desc 'autolike', 'Automatically like recommended people. Stops when there is no more people to like.'
+      def autolike
+        tinder_client = sign_in
 
         puts 'Starting likes...'
         tinder_bot = Tinderbot::Tinder::Bot.new tinder_client
@@ -18,11 +58,14 @@ module Tinderbot
 
       private
 
-      def sign_in(tinder_client)
+      def sign_in
+        puts 'Connecting to tinder...'
+        tinder_client = Tinderbot::Tinder::Client.new
         store = PStore.new(FACEBOOK_CREDENTIALS_FILE)
         facebook_authentication_token, facebook_user_id = get_last_facebook_credentials(store)
         tinder_authentication_token = get_tinder_authentication_token(store, tinder_client, facebook_authentication_token, facebook_user_id)
         tinder_client.sign_in tinder_authentication_token
+        tinder_client
       end
 
       def get_tinder_authentication_token(store, tinder_client, facebook_authentication_token, facebook_user_id)
