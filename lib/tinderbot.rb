@@ -5,6 +5,3 @@ require 'watir-webdriver'
 require 'json'
 
 Gem.find_files('tinderbot/**/*.rb').each { |file| require file }
-
-module Tinderbot
-end

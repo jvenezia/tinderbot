@@ -10,13 +10,14 @@ module Tinderbot
         puts "\n"
 
         puts 'Getting your facebook authentication token...'
-        facebook_authentication_token, facebook_user_id = Tinderbot::Facebook.get_credentials(options[:facebook_email], options[:facebook_password])
+        facebook_authentication_token, facebook_user_id = Tinderbot::Facebook.get_credentials(facebook_email, facebook_password)
 
         puts 'Connecting to tinder...'
-        tinder = Tinderbot::Tinder.new(facebook_authentication_token, facebook_user_id, facebook_email: facebook_email, facebook_password: facebook_password)
+        tinder_client = Tinderbot::Tinder::Client.new(facebook_authentication_token, facebook_user_id)
 
         puts 'Starting likes...'
-        tinder.like_recommended_people
+        tinder_bot = Tinderbot::Tinder::Bot.new tinder_client
+        tinder_bot.like_recommended_people
       end
     end
   end

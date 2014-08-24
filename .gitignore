@@ -21,6 +21,4 @@ tmp
 *.a
 *.log
 mkmf.log
-
-facebook_credentials.json
 .idea
