@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Tinderbot::Tinder::Client do
   let(:tinder_client) { Tinderbot::Tinder::Client.new('', '') }
-  before { Tinderbot::Tinder::Client.any_instance.should_receive(:sign_in) }
+  before { expect_any_instance_of(Tinderbot::Tinder::Client).to receive(:sign_in) }
   let(:connection) { tinder_client.connection }
 
   describe '.connection' do
@@ -14,8 +14,8 @@ describe Tinderbot::Tinder::Client do
   describe '.get_recommended_people' do
     let(:recommended_people_response) { open('spec/fixtures/recommended_people.json').read }
 
-    before { connection.should_receive(:post).with('user/recs') { connection } }
-    before { connection.should_receive(:body) { recommended_people_response } }
+    before { expect(connection).to receive(:post).with('user/recs').and_return(connection) }
+    before { expect(connection).to receive(:body).and_return(recommended_people_response) }
 
     subject { tinder_client.get_recommended_people }
 
@@ -25,7 +25,7 @@ describe Tinderbot::Tinder::Client do
   describe '.like' do
     let(:user_id) { 'user_id' }
 
-    before { connection.should_receive(:get).with("like/#{user_id}") }
+    before { expect(connection).to receive(:get).with("like/#{user_id}") }
 
     it { tinder_client.like user_id }
   end
@@ -34,7 +34,7 @@ describe Tinderbot::Tinder::Client do
     context 'there is no people' do
       let(:people_ids) { [] }
 
-      before { Tinderbot::Tinder::Client.any_instance.should_not_receive(:like) }
+      before { expect_any_instance_of(Tinderbot::Tinder::Client).not_to receive(:like) }
 
       it { tinder_client.like_all people_ids }
     end
@@ -42,7 +42,7 @@ describe Tinderbot::Tinder::Client do
     context 'there two people' do
       let(:people_ids) { %w(user_1_id user_2_id) }
 
-      before { people_ids.each { |user_id| Tinderbot::Tinder::Client.any_instance.should_receive(:like).with(user_id) } }
+      before { people_ids.each { |user_id| expect_any_instance_of(Tinderbot::Tinder::Client).to receive(:like).with(user_id) } }
 
       it { tinder_client.like_all people_ids }
     end
@@ -51,7 +51,7 @@ describe Tinderbot::Tinder::Client do
   describe '.dislike' do
     let(:user_id) { 'user_id' }
 
-    before { connection.should_receive(:get).with("pass/#{user_id}") }
+    before { expect(connection).to receive(:get).with("pass/#{user_id}") }
 
     it { tinder_client.dislike user_id }
   end
@@ -60,7 +60,7 @@ describe Tinderbot::Tinder::Client do
     context 'there is no people' do
       let(:people_ids) { [] }
 
-      before { Tinderbot::Tinder::Client.any_instance.should_not_receive(:dislike) }
+      before { expect_any_instance_of(Tinderbot::Tinder::Client).not_to receive(:dislike) }
 
       it { tinder_client.dislike_all people_ids }
     end
@@ -68,7 +68,7 @@ describe Tinderbot::Tinder::Client do
     context 'there two people' do
       let(:people_ids) { %w(user_1_id user_2_id) }
 
-      before { people_ids.each { |user_id| Tinderbot::Tinder::Client.any_instance.should_receive(:dislike).with(user_id) } }
+      before { people_ids.each { |user_id| expect_any_instance_of(Tinderbot::Tinder::Client).to receive(:dislike).with(user_id) } }
 
       it { tinder_client.dislike_all people_ids }
     end
@@ -78,7 +78,7 @@ describe Tinderbot::Tinder::Client do
     let(:user_id) { 'user_id' }
     let(:message) { 'message' }
 
-    before { connection.should_receive(:post).with("user/matches/#{user_id}", {message: message}) }
+    before { expect(connection).to receive(:post).with("user/matches/#{user_id}", {message: message}) }
 
     it { tinder_client.send_message user_id, message }
   end
