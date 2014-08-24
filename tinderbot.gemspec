@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'tinderbot/version'
 
 Gem::Specification.new do |spec|
-  spec.name = 'Tinderbot'
+  spec.name = 'tinderbot'
   spec.version = Tinderbot::VERSION
   spec.authors = ['Jeremy Venezia']
   spec.email = ['veneziajeremy@gmail.com']
