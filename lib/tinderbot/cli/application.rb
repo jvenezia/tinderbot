@@ -41,7 +41,7 @@ module Tinderbot
         puts tinder_client.dislike user_id
       end
 
-      desc 'send USER_ID MESSAGE', 'Sends message to user'
+      desc 'send USER_ID MESSAGE', 'Send message to user'
       def send(user_id, message)
         tinder_client = sign_in
         puts tinder_client.send_message user_id, message
