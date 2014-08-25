@@ -44,10 +44,6 @@ module Tinderbot::Tinder
       end
     end
 
-    def like_all(user_ids)
-      user_ids.each { |user_id| like user_id }
-    end
-
     def dislike(user_or_user_id)
       if user_or_user_id.is_a? Tinderbot::Tinder::Models::User
         dislike_from_user_id(user_or_user_id.id)
@@ -55,10 +51,6 @@ module Tinderbot::Tinder
       else
         dislike_from_user_id(user_or_user_id)
       end
-    end
-
-    def dislike_all(user_ids)
-      user_ids.each { |user_id| dislike user_id }
     end
 
     def send_message(user_id, message)

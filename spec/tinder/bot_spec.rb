@@ -9,7 +9,7 @@ describe Tinderbot::Tinder::Bot do
   end
 
   describe '.like_recommended_people' do
-    let(:recommended_users_json) { JSON.parse(open('spec/fixtures/recommended_users.json').read)['results'] }
+    let(:recommended_users) { JSON.parse(open('spec/fixtures/recommended_users.json').read)['results'].each { |user| Tinderbot::Tinder::Models::User.build_from_tinder_json user } }
 
     context 'there is no recommended people' do
       before { expect_any_instance_of(Tinderbot::Tinder::Client).to receive(:recommended_users).and_return(nil) }
@@ -20,20 +20,20 @@ describe Tinderbot::Tinder::Bot do
     end
 
     context 'there is one set of recommended people' do
-      before { expect_any_instance_of(Tinderbot::Tinder::Client).to receive(:recommended_users).and_return(recommended_users_json) }
+      before { expect_any_instance_of(Tinderbot::Tinder::Client).to receive(:recommended_users).and_return(recommended_users) }
       before { expect_any_instance_of(Tinderbot::Tinder::Client).to receive(:recommended_users).and_return(nil) }
 
-      before { expect_any_instance_of(Tinderbot::Tinder::Client).not_to receive(:like_all).with(recommended_users_json.map { |r| r['_id'] }).exactly(1).times }
+      before { recommended_users.each { |user| expect_any_instance_of(Tinderbot::Tinder::Client).not_to receive(:like).with(user).exactly(1).times } }
 
       it { tinder_bot.like_recommended_users }
     end
 
     context 'there is two sets of recommended people' do
-      before { expect_any_instance_of(Tinderbot::Tinder::Client).to receive(:recommended_users).and_return(recommended_users_json) }
-      before { expect_any_instance_of(Tinderbot::Tinder::Client).to receive(:recommended_users).and_return(recommended_users_json) }
+      before { expect_any_instance_of(Tinderbot::Tinder::Client).to receive(:recommended_users).and_return(recommended_users) }
+      before { expect_any_instance_of(Tinderbot::Tinder::Client).to receive(:recommended_users).and_return(recommended_users) }
       before { expect_any_instance_of(Tinderbot::Tinder::Client).to receive(:recommended_users).and_return(nil) }
 
-      before { expect_any_instance_of(Tinderbot::Tinder::Client).not_to receive(:like_all).with(recommended_users_json.map { |r| r['_id'] }).exactly(2).times }
+      before { recommended_users.each { |user| expect_any_instance_of(Tinderbot::Tinder::Client).not_to receive(:like).with(user).exactly(2).times } }
 
       it { tinder_bot.like_recommended_users }
     end

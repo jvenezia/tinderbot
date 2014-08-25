@@ -74,24 +74,6 @@ describe Tinderbot::Tinder::Client do
     end
   end
 
-  describe '.like_all' do
-    context 'there is no people' do
-      let(:people_ids) { [] }
-
-      before { expect_any_instance_of(Tinderbot::Tinder::Client).not_to receive(:like) }
-
-      it { tinder_client.like_all people_ids }
-    end
-
-    context 'there two people' do
-      let(:people_ids) { %w(user_1_id user_2_id) }
-
-      before { people_ids.each { |user_id| expect_any_instance_of(Tinderbot::Tinder::Client).to receive(:like).with(user_id) } }
-
-      it { tinder_client.like_all people_ids }
-    end
-  end
-
   describe '.dislike' do
     context 'from user id' do
       let(:user_id) { 'user_id' }
@@ -108,24 +90,6 @@ describe Tinderbot::Tinder::Client do
       before { expect(connection).to receive(:get).with("pass/#{user.id}") }
 
       it { tinder_client.dislike user }
-    end
-  end
-
-  describe '.dislike_all' do
-    context 'there is no people' do
-      let(:people_ids) { [] }
-
-      before { expect_any_instance_of(Tinderbot::Tinder::Client).not_to receive(:dislike) }
-
-      it { tinder_client.dislike_all people_ids }
-    end
-
-    context 'there two people' do
-      let(:people_ids) { %w(user_1_id user_2_id) }
-
-      before { people_ids.each { |user_id| expect_any_instance_of(Tinderbot::Tinder::Client).to receive(:dislike).with(user_id) } }
-
-      it { tinder_client.dislike_all people_ids }
     end
   end
 
