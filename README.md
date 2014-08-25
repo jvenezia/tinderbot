@@ -67,7 +67,7 @@ tinder_client.send_message(user_id, message)
 Tinderbot provides a simple bot which automatically likes all recommended people. It stops when there is no more recommended people.
 ```ruby
 tinder_bot = Tinderbot::Tinder::Bot.new tinder_client
-tinder_bot.like_recommended_people
+tinder_bot.like_recommended_users
 ```
 
 ### Using the command line tool

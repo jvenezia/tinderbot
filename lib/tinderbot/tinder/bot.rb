@@ -6,12 +6,12 @@ module Tinderbot::Tinder
       @client = client
     end
 
-    def like_recommended_people
-      recommended_people = @client.recommended_users
-      while recommended_people
-        recommended_people_ids = recommended_people.map { |r| r['_id'] }
+    def like_recommended_users
+      recommended_users = @client.recommended_users
+      while recommended_users
+        recommended_people_ids = recommended_users.map { |r| r['_id'] }
         @client.like_all recommended_people_ids
-        recommended_people = @client.recommended_users
+        recommended_users = @client.recommended_users
       end
     end
   end

@@ -11,14 +11,14 @@ describe Tinderbot::Tinder::Client do
   end
 
   describe '.me' do
-    let(:user_tinder_raw_json) { open('spec/fixtures/recommended_users.json').read }
+    let(:me_tinder_raw_json) { open('spec/fixtures/me.json').read }
 
     before { expect(connection).to receive(:get).with('profile').and_return(connection) }
-    before { expect(connection).to receive(:body).and_return(user_tinder_raw_json) }
+    before { expect(connection).to receive(:body).and_return(me_tinder_raw_json) }
 
     subject { tinder_client.me }
 
-    it { should eq JSON.parse(user_tinder_raw_json) }
+    it { should eql? Tinderbot::Tinder::Models::User.build_from_tinder_json(JSON.parse(me_tinder_raw_json)) }
   end
 
   describe '.user' do
@@ -30,7 +30,7 @@ describe Tinderbot::Tinder::Client do
 
     subject { tinder_client.user user_id }
 
-    it { should eq JSON.parse(user_tinder_raw_json) }
+    it { should eql? Tinderbot::Tinder::Models::User.build_from_tinder_json(JSON.parse(user_tinder_raw_json)) }
   end
 
   describe '.updates' do
@@ -52,7 +52,7 @@ describe Tinderbot::Tinder::Client do
 
     subject { tinder_client.recommended_users }
 
-    it { should eq JSON.parse(recommended_users_tinder_raw_json)['results'] }
+    it { should eql? JSON.parse(recommended_users_tinder_raw_json)['results'].map { |r| Tinderbot::Tinder::Models::User.build_from_tinder_json r } }
   end
 
   describe '.like' do

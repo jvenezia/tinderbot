@@ -1,9 +1,10 @@
 module Tinderbot::Tinder::Models
   class User
-    attr_accessor :id, :name, :bio, :birth_date, :gender, :photo_urls
+    attr_accessor :original_tinder_json, :id, :name, :bio, :birth_date, :gender, :photo_urls
 
     def self.build_from_tinder_json(tinder_json)
       user = self.new
+      user.original_tinder_json = tinder_json
       user.id = tinder_json['_id']
       user.name = tinder_json['name']
       user.bio = tinder_json['bio']

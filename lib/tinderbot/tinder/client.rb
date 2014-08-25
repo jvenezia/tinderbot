@@ -20,11 +20,11 @@ module Tinderbot::Tinder
     end
 
     def me
-      JSON.parse(@connection.get('profile').body)
+      Tinderbot::Tinder::Models::User.build_from_tinder_json JSON.parse(@connection.get('profile').body)
     end
 
     def user(user_id)
-      JSON.parse(@connection.get("user/#{user_id}").body)
+      Tinderbot::Tinder::Models::User.build_from_tinder_json JSON.parse(@connection.get("user/#{user_id}").body)
     end
 
     def updates
@@ -32,7 +32,7 @@ module Tinderbot::Tinder
     end
 
     def recommended_users
-      JSON.parse(@connection.post('user/recs').body)['results']
+      JSON.parse(@connection.post('user/recs').body)['results'].map { |r| Tinderbot::Tinder::Models::User.build_from_tinder_json r }
     end
 
     def like(user_or_user_id)

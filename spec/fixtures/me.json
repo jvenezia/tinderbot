@@ -1,0 +1,95 @@
+{
+	"_id": "user_id",
+	"age_filter_max": 1000,
+	"age_filter_min": 19,
+	"bio": "user bio",
+	"birth_date": "1989-02-13T00:00:00.000Z",
+	"create_date": "2013-11-21T22:29:01.958Z",
+	"facebook_id": "user_facebook_id",
+	"gender": 0,
+	"gender_filter": 1,
+	"location": {
+		"id": "location_id",
+		"name": "Paris, France"
+	},
+	"name": "Name",
+	"ping_time": "2014-08-25T18:01:50.032Z",
+	"pos": {
+		"at": 123,
+		"lon": 1.123,
+		"lat": 1.123
+	},
+	"photos": [
+		{
+			"url": "http://images.gotinder.com/user_id/image_1_id.jpg",
+			"processedFiles": [
+				{
+					"url": "http://images.gotinder.com/user_id/640x640_image_1_id.jpg",
+					"height": 640,
+					"width": 640
+				},
+				{
+					"url": "http://images.gotinder.com/user_id/320x320_image_1_id.jpg",
+					"height": 320,
+					"width": 320
+				},
+				{
+					"url": "http://images.gotinder.com/user_id/172x172_image_1_id.jpg",
+					"height": 172,
+					"width": 172
+				},
+				{
+					"url": "http://images.gotinder.com/user_id/84x84_image_1_id.jpg",
+					"height": 84,
+					"width": 84
+				}
+			],
+			"fbId": "image_2_facebook_id",
+			"extension": "jpg",
+			"fileName": "image_1_id.jpg",
+			"main": true,
+			"ydistance_percent": 1,
+			"yoffset_percent": 0,
+			"xoffset_percent": 0.1235275,
+			"id": "image_1_id",
+			"xdistance_percent": 0.7529297
+		},
+		{
+			"url": "http://images.gotinder.com/user_id/image_2_id.jpg",
+			"processedFiles": [
+				{
+					"url": "http://images.gotinder.com/user_id/640x640_image_2_id.jpg",
+					"height": 640,
+					"width": 640
+				},
+				{
+					"url": "http://images.gotinder.com/user_id/320x320_image_2_id.jpg",
+					"height": 320,
+					"width": 320
+				},
+				{
+					"url": "http://images.gotinder.com/user_id/172x172_image_2_id.jpg",
+					"height": 172,
+					"width": 172
+				},
+				{
+					"url": "http://images.gotinder.com/user_id/84x84_image_2_id.jpg",
+					"height": 84,
+					"width": 84
+				}
+			],
+			"fbId": "image_2_facebook_id",
+			"extension": "jpg",
+			"fileName": "image_2_id.jpg",
+			"main": false,
+			"ydistance_percent": 0.8473684,
+			"yoffset_percent": 0.005296052,
+			"xoffset_percent": 0,
+			"id": "image_2_id",
+			"xdistance_percent": 1
+		}
+	],
+	"interested_in": [1],
+	"distance_filter": 13,
+	"discoverable": true
+}

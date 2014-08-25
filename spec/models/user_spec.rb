@@ -6,6 +6,7 @@ describe Tinderbot::Tinder::Models::User do
 
     subject { Tinderbot::Tinder::Models::User.build_from_tinder_json user_tinder_json }
 
+    it { expect(subject.original_tinder_json).to eq user_tinder_json }
     it { expect(subject.id).to eq user_tinder_json['_id'] }
     it { expect(subject.name).to eq user_tinder_json['name'] }
     it { expect(subject.bio).to eq user_tinder_json['bio'] }

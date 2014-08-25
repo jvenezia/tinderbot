@@ -53,7 +53,7 @@ module Tinderbot
 
         puts 'Starting likes...'
         tinder_bot = Tinderbot::Tinder::Bot.new tinder_client
-        tinder_bot.like_recommended_people
+        tinder_bot.like_recommended_users
       end
 
       private
