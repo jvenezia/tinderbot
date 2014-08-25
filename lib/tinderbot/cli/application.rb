@@ -8,37 +8,37 @@ module Tinderbot
       desc 'me', 'Get your profile data'
       def me
         tinder_client = sign_in
-        puts tinder_client.me
+        puts tinder_client.me.to_yaml
       end
 
       desc 'user USER_ID', 'Get user profile data'
       def user(user_id)
         tinder_client = sign_in
-        puts tinder_client.user user_id
+        puts tinder_client.user(user_id).to_yaml
       end
 
       desc 'updates', 'Get updates'
       def updates
         tinder_client = sign_in
-        puts tinder_client.updates
+        puts tinder_client.updates.to_yaml
       end
 
       desc 'recommended', 'Get recommended users'
       def recommended
         tinder_client = sign_in
-        puts tinder_client.recommended_users
+        puts tinder_client.recommended_users.to_yaml
       end
 
       desc 'like USER_ID', 'Like user'
       def like(user_id)
         tinder_client = sign_in
-        puts tinder_client.like user_id
+        tinder_client.like user_id
       end
 
       desc 'dislike USER_ID', 'Dislike user'
       def dislike(user_id)
         tinder_client = sign_in
-        puts tinder_client.dislike user_id
+        tinder_client.dislike user_id
       end
 
       desc 'send USER_ID MESSAGE', 'Send message to user'

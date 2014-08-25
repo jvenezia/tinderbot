@@ -30,7 +30,7 @@ describe Tinderbot::Tinder::Client do
 
     subject { tinder_client.user user_id }
 
-    it { should eql? Tinderbot::Tinder::Models::User.build_from_tinder_json(JSON.parse(user_tinder_raw_json)) }
+    it { should eql? Tinderbot::Tinder::Models::User.build_from_tinder_json(JSON.parse(user_tinder_raw_json)['results']) }
   end
 
   describe '.updates' do
@@ -65,7 +65,7 @@ describe Tinderbot::Tinder::Client do
     end
 
     context 'from user model' do
-      let(:user_tinder_json) { JSON.parse(open('spec/fixtures/user.json').read) }
+      let(:user_tinder_json) { JSON.parse(open('spec/fixtures/user.json').read)['results'] }
       let(:user) { Tinderbot::Tinder::Models::User.build_from_tinder_json user_tinder_json }
 
       before { expect(connection).to receive(:get).with("like/#{user.id}") }
@@ -84,7 +84,7 @@ describe Tinderbot::Tinder::Client do
     end
 
     context 'from user model' do
-      let(:user_tinder_json) { JSON.parse(open('spec/fixtures/user.json').read) }
+      let(:user_tinder_json) { JSON.parse(open('spec/fixtures/user.json').read)['results'] }
       let(:user) { Tinderbot::Tinder::Models::User.build_from_tinder_json user_tinder_json }
 
       before { expect(connection).to receive(:get).with("pass/#{user.id}") }

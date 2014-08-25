@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Tinderbot::Tinder::Models::User do
   describe '#build_from_tinder_json' do
-    let(:user_tinder_json) { JSON.parse(open('spec/fixtures/user.json').read) }
+    let(:user_tinder_json) { JSON.parse(open('spec/fixtures/user.json').read)['results'] }
 
     subject { Tinderbot::Tinder::Models::User.build_from_tinder_json user_tinder_json }
 

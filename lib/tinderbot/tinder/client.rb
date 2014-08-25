@@ -24,7 +24,7 @@ module Tinderbot::Tinder
     end
 
     def user(user_id)
-      Tinderbot::Tinder::Models::User.build_from_tinder_json JSON.parse(@connection.get("user/#{user_id}").body)
+      Tinderbot::Tinder::Models::User.build_from_tinder_json JSON.parse(@connection.get("user/#{user_id}").body)['results']
     end
 
     def updates
@@ -38,23 +38,26 @@ module Tinderbot::Tinder
     def like(user_or_user_id)
       if user_or_user_id.is_a? Tinderbot::Tinder::Models::User
         like_from_user_id(user_or_user_id.id)
-        puts "Liked #{user_or_user_id.name}" if @logs_enabled
+        puts "Liked #{user_or_user_id.id} (#{user_or_user_id.name})" if @logs_enabled
       else
         like_from_user_id(user_or_user_id)
+        puts "Liked #{user_or_user_id}" if @logs_enabled
       end
     end
 
     def dislike(user_or_user_id)
       if user_or_user_id.is_a? Tinderbot::Tinder::Models::User
         dislike_from_user_id(user_or_user_id.id)
-        puts "Disliked #{user_id}" if @logs_enabled
+        puts "Disliked #{user_or_user_id.id} (#{user_or_user_id.name})" if @logs_enabled
       else
         dislike_from_user_id(user_or_user_id)
+        puts "Disliked #{user_or_user_id}" if @logs_enabled
       end
     end
 
     def send_message(user_id, message)
       @connection.post("user/matches/#{user_id}", {message: message})
+      puts "Sent message to #{user_id}" if @logs_enabled
     end
 
     protected
