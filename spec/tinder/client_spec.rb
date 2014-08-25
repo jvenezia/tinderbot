@@ -11,26 +11,26 @@ describe Tinderbot::Tinder::Client do
   end
 
   describe '.me' do
-    let(:user_response) { open('spec/fixtures/recommended_users.json').read }
+    let(:user_tinder_raw_json) { open('spec/fixtures/recommended_users.json').read }
 
     before { expect(connection).to receive(:get).with('profile').and_return(connection) }
-    before { expect(connection).to receive(:body).and_return(user_response) }
+    before { expect(connection).to receive(:body).and_return(user_tinder_raw_json) }
 
     subject { tinder_client.me }
 
-    it { should eq JSON.parse(user_response) }
+    it { should eq JSON.parse(user_tinder_raw_json) }
   end
 
   describe '.user' do
     let(:user_id) { 'user_id' }
-    let(:user_response) { open('spec/fixtures/user.json').read }
+    let(:user_tinder_raw_json) { open('spec/fixtures/user.json').read }
 
     before { expect(connection).to receive(:get).with("user/#{user_id}").and_return(connection) }
-    before { expect(connection).to receive(:body).and_return(user_response) }
+    before { expect(connection).to receive(:body).and_return(user_tinder_raw_json) }
 
     subject { tinder_client.user user_id }
 
-    it { should eq JSON.parse(user_response) }
+    it { should eq JSON.parse(user_tinder_raw_json) }
   end
 
   describe '.updates' do
@@ -45,14 +45,14 @@ describe Tinderbot::Tinder::Client do
   end
 
   describe '.recommended_users' do
-    let(:recommended_people_response) { open('spec/fixtures/recommended_users.json').read }
+    let(:recommended_users_tinder_raw_json) { open('spec/fixtures/recommended_users.json').read }
 
     before { expect(connection).to receive(:post).with('user/recs').and_return(connection) }
-    before { expect(connection).to receive(:body).and_return(recommended_people_response) }
+    before { expect(connection).to receive(:body).and_return(recommended_users_tinder_raw_json) }
 
     subject { tinder_client.recommended_users }
 
-    it { should eq JSON.parse(recommended_people_response)['results'] }
+    it { should eq JSON.parse(recommended_users_tinder_raw_json)['results'] }
   end
 
   describe '.like' do
