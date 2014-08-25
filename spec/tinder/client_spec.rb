@@ -56,11 +56,22 @@ describe Tinderbot::Tinder::Client do
   end
 
   describe '.like' do
-    let(:user_id) { 'user_id' }
+    context 'from user id' do
+      let(:user_id) { 'user_id' }
 
-    before { expect(connection).to receive(:get).with("like/#{user_id}") }
+      before { expect(connection).to receive(:get).with("like/#{user_id}") }
 
-    it { tinder_client.like user_id }
+      it { tinder_client.like user_id }
+    end
+
+    context 'from user model' do
+      let(:user_tinder_json) { JSON.parse(open('spec/fixtures/user.json').read) }
+      let(:user) { Tinderbot::Tinder::Models::User.build_from_tinder_json user_tinder_json }
+
+      before { expect(connection).to receive(:get).with("like/#{user.id}") }
+
+      it { tinder_client.like user }
+    end
   end
 
   describe '.like_all' do
@@ -82,11 +93,22 @@ describe Tinderbot::Tinder::Client do
   end
 
   describe '.dislike' do
-    let(:user_id) { 'user_id' }
+    context 'from user id' do
+      let(:user_id) { 'user_id' }
 
-    before { expect(connection).to receive(:get).with("pass/#{user_id}") }
+      before { expect(connection).to receive(:get).with("pass/#{user_id}") }
 
-    it { tinder_client.dislike user_id }
+      it { tinder_client.dislike user_id }
+    end
+
+    context 'from user model' do
+      let(:user_tinder_json) { JSON.parse(open('spec/fixtures/user.json').read) }
+      let(:user) { Tinderbot::Tinder::Models::User.build_from_tinder_json user_tinder_json }
+
+      before { expect(connection).to receive(:get).with("pass/#{user.id}") }
+
+      it { tinder_client.dislike user }
+    end
   end
 
   describe '.dislike_all' do

@@ -35,18 +35,26 @@ module Tinderbot::Tinder
       JSON.parse(@connection.post('user/recs').body)['results']
     end
 
-    def like(user_id)
-      @connection.get "like/#{user_id}"
-      puts "Liked #{user_id}" if @logs_enabled
+    def like(user_or_user_id)
+      if user_or_user_id.is_a? Tinderbot::Tinder::Models::User
+        like_from_user_id(user_or_user_id.id)
+        puts "Liked #{user_or_user_id.name}" if @logs_enabled
+      else
+        like_from_user_id(user_or_user_id)
+      end
     end
 
     def like_all(user_ids)
       user_ids.each { |user_id| like user_id }
     end
 
-    def dislike(user_id)
-      @connection.get "pass/#{user_id}"
-      puts "Disliked #{user_id}" if @logs_enabled
+    def dislike(user_or_user_id)
+      if user_or_user_id.is_a? Tinderbot::Tinder::Models::User
+        dislike_from_user_id(user_or_user_id.id)
+        puts "Disliked #{user_id}" if @logs_enabled
+      else
+        dislike_from_user_id(user_or_user_id)
+      end
     end
 
     def dislike_all(user_ids)
@@ -58,6 +66,14 @@ module Tinderbot::Tinder
     end
 
     protected
+
+    def like_from_user_id(user_id)
+      @connection.get "like/#{user_id}"
+    end
+
+    def dislike_from_user_id(user_id)
+      @connection.get "pass/#{user_id}"
+    end
 
     def build_connection
       @connection = Faraday.new(url: TINDER_API_URL) do |faraday|
