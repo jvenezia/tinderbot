@@ -61,7 +61,7 @@ user.birth_date #=> #<Date: 2014-05-01>
 user.gender #=> :male (or :female)
 user.photo_urls #=> ['http://photo_1_url.jpg', 'http://photo_2_url.jpg']
 
-user = tinder_client.user(user_id) #=> returns a Tinderbot::Tinder::Models::User object
+user = tinder_client.user(user_id) #=> returns an instance of Tinderbot::Tinder::Models::User
 
 users = tinder_client.recommended_users #=> returns an array of Tinderbot::Tinder::Models::User instances
 
