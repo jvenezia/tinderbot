@@ -12,7 +12,7 @@ module Tinderbot
       facebook_authentication_token = /#access_token=(.*)&expires_in/.match(browser.url).captures[0]
 
       browser.goto 'https://www.facebook.com/'
-      browser.link(title: 'Journal').when_present.click
+      browser.link(class: 'fbxWelcomeBoxName').when_present.click
       facebook_user_id = /fbid=(.*)&set/.match(browser.link(class: 'profilePicThumb').when_present.href).captures[0]
 
       browser.close
