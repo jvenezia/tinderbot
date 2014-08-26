@@ -22,4 +22,13 @@ describe Tinderbot::Tinder::Models::User do
       it { expect(subject.gender).to eq :female }
     end
   end
+
+  describe '.to_yaml' do
+    let(:user_tinder_json) { JSON.parse(open('spec/fixtures/user.json').read)['results'] }
+    let(:user) { Tinderbot::Tinder::Models::User.build_from_tinder_json user_tinder_json }
+
+    subject { user.to_yaml }
+
+    it { should_not match('original_tinder_json') }
+  end
 end

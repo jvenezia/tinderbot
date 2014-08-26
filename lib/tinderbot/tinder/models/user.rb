@@ -15,6 +15,10 @@ module Tinderbot
           user.photo_urls = tinder_json['photos'].map { |t| t['url'] }
           user
         end
+
+        def to_yaml_properties
+          instance_variables - [:@original_tinder_json]
+        end
       end
     end
   end
