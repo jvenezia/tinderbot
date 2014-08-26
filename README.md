@@ -52,14 +52,23 @@ tinder_client.sign_in tinder_authentication_token
 
 ### Interacting with the Tinder API
 ```ruby
-tinder_client.me
-tinder_client.user(user_id)
-tinder_client.updates
-tinder_client.recommended_users
+user = tinder_client.me #=> returns an instance of Tinderbot::Tinder::Models::User
+user.original_tinder_json #=> {...} original json from tinder's API
+user.id #=> 1234
+user.name #=> 'Bob'
+user.bio #=> 'I am awesome'
+user.birth_date #=> #<Date: 2014-05-01> 
+user.gender #=> :male (or :female)
+user.photo_urls #=> ['http://photo_1_url.jpg', 'http://photo_2_url.jpg']
+
+user = tinder_client.user(user_id) #=> returns a Tinderbot::Tinder::Models::User object
+
+users = tinder_client.recommended_users #=> returns an array of Tinderbot::Tinder::Models::User instances
+
+tinder_client.updates #=> {...} original json from tinder's API
+
 tinder_client.like(user_id)
-tinder_client.like_all(user_ids)
 tinder_client.dislike(user_id)
-tinder_client.dislike_all(user_ids)
 tinder_client.send_message(user_id, message)
 ```
 
