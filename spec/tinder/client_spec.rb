@@ -10,13 +10,13 @@ describe Tinderbot::Tinder::Client do
     it { expect(connection.headers[:user_agent]).to eq(Tinderbot::Tinder::Client::CONNECTION_USER_AGENT) }
   end
 
-  describe '.me' do
-    let(:me_tinder_raw_json) { open('spec/fixtures/me.json').read }
+  describe '.profile' do
+    let(:me_tinder_raw_json) { open('spec/fixtures/profile.json').read }
 
     before { expect(connection).to receive(:get).with('profile').and_return(connection) }
     before { expect(connection).to receive(:body).and_return(me_tinder_raw_json) }
 
-    subject { tinder_client.me }
+    subject { tinder_client.profile }
 
     it { should eql? Tinderbot::Tinder::Models::User.build_from_tinder_json(JSON.parse(me_tinder_raw_json)) }
   end

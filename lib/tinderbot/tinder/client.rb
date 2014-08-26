@@ -20,7 +20,7 @@ module Tinderbot
         @connection.headers['X-Auth-Token'] = authentication_token
       end
 
-      def me
+      def profile
         Tinderbot::Tinder::Models::User.build_from_tinder_json JSON.parse(@connection.get('profile').body)
       end
 

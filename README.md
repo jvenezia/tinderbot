@@ -52,7 +52,7 @@ tinder_client.sign_in tinder_authentication_token
 
 ### Interacting with the Tinder API
 ```ruby
-user = tinder_client.me #=> returns an instance of Tinderbot::Tinder::Models::User
+user = tinder_client.profile #=> returns an instance of Tinderbot::Tinder::Models::User
 user.original_tinder_json #=> {...} original json from tinder's API
 user.id #=> 1234
 user.name #=> 'Bob'
@@ -92,7 +92,7 @@ Commands:
   tinderbot dislike USER_ID       # Dislike user
   tinderbot help [COMMAND]        # Describe available commands or one specific command
   tinderbot like USER_ID          # Like user
-  tinderbot me                    # Get your profile data
+  tinderbot profile               # Get your profile data
   tinderbot recommended           # Get recommended users
   tinderbot send USER_ID MESSAGE  # Send message to user
   tinderbot updates               # Get updates

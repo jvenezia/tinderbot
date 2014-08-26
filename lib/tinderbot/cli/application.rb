@@ -5,10 +5,10 @@ module Tinderbot
     class Application < Thor
       FACEBOOK_CREDENTIALS_FILE = 'facebook_credentials.pstore'
 
-      desc 'me', 'Get your profile data'
-      def me
+      desc 'profile', 'Get your profile data'
+      def profile
         tinder_client = sign_in
-        puts tinder_client.me.to_yaml
+        puts tinder_client.profile.to_yaml
       end
 
       desc 'user USER_ID', 'Get user profile data'
