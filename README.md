@@ -67,9 +67,13 @@ users = tinder_client.recommended_users #=> returns an array of Tinderbot::Tinde
 
 tinder_client.updates #=> {...} original json from tinder's API
 
-tinder_client.like(user_id)
-tinder_client.dislike(user_id)
 tinder_client.send_message(user_id, message)
+
+# you can provide a user instance or a user id to like or dislike users
+tinder_client.like(user)
+tinder_client.like(user.id)
+tinder_client.dislike(user)
+tinder_client.dislike(user.id)
 ```
 
 ### Using the bot
