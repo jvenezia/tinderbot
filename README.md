@@ -45,7 +45,7 @@ Once you get your credentials, you can sign in to Tinder.
 facebook_authentication_token = 'your facebook authentication token'
 facebook_user_id = 'your facebook user id'
 
-tinder_client = Tinderbot::Tinder::Client.new
+tinder_client = Tinderbot::Client.new
 tinder_authentication_token = tinder_client.get_authentication_token(facebook_authentication_token, facebook_user_id)
 tinder_client.sign_in tinder_authentication_token
 ```
@@ -61,9 +61,9 @@ user.birth_date #=> #<Date: 2014-05-01>
 user.gender #=> :male (or :female)
 user.photo_urls #=> ['http://photo_1_url.jpg', 'http://photo_2_url.jpg']
 
-user = tinder_client.user(user_id) #=> returns an instance of Tinderbot::Tinder::Models::User
+user = tinder_client.user(user_id) #=> returns an instance of Tinderbot::Model::User
 
-users = tinder_client.recommended_users #=> returns an array of Tinderbot::Tinder::Models::User instances
+users = tinder_client.recommended_users #=> returns an array of Tinderbot::Model::User instances
 
 tinder_client.updates #=> {...} original json from tinder's API
 

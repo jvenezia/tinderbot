@@ -58,7 +58,7 @@ module Tinderbot
         tinder_client = sign_in
 
         puts 'Starting likes...'
-        tinder_bot = Tinderbot::Tinder::Bot.new tinder_client
+        tinder_bot = Tinderbot::Bot.new tinder_client
         tinder_bot.like_recommended_users
       end
 
@@ -66,7 +66,7 @@ module Tinderbot
 
       def sign_in
         puts 'Connecting to tinder...'
-        tinder_client = Tinderbot::Tinder::Client.new logs_enabled: true
+        tinder_client = Tinderbot::Client.new logs_enabled: true
         store = PStore.new(FACEBOOK_CREDENTIALS_FILE)
         facebook_authentication_token, facebook_user_id = get_last_facebook_credentials(store)
         tinder_authentication_token = get_tinder_authentication_token(store, tinder_client, facebook_authentication_token, facebook_user_id)

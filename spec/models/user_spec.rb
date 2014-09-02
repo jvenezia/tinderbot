@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Tinderbot::Tinder::Models::User do
+describe Tinderbot::Model::User do
   describe '#build_from_tinder_json' do
     let(:user_tinder_json) { JSON.parse(open('spec/fixtures/user.json').read)['results'] }
 
-    subject { Tinderbot::Tinder::Models::User.build_from_tinder_json user_tinder_json }
+    subject { Tinderbot::Model::User.build_from_tinder_json user_tinder_json }
 
     it { expect(subject.original_tinder_json).to eq user_tinder_json }
     it { expect(subject.id).to eq user_tinder_json['_id'] }
@@ -25,7 +25,7 @@ describe Tinderbot::Tinder::Models::User do
 
   describe '.to_yaml' do
     let(:user_tinder_json) { JSON.parse(open('spec/fixtures/user.json').read)['results'] }
-    let(:user) { Tinderbot::Tinder::Models::User.build_from_tinder_json user_tinder_json }
+    let(:user) { Tinderbot::Model::User.build_from_tinder_json user_tinder_json }
 
     subject { user.to_yaml }
 
