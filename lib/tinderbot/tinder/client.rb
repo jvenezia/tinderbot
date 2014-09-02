@@ -61,6 +61,24 @@ module Tinderbot
         puts "Sent message to #{user_id}" if @logs_enabled
       end
 
+      def update_location(location)
+        lat_lon = location.split(',')
+
+        if lat_lon.length != 2
+          puts 'Invalid location provided'
+        else
+          lat = lat_lon[0]
+          lon = lat_lon[1]
+          result = JSON.parse(@connection.post('user/ping', {lat: lat, lon: lon}).body)
+
+          if result['status'] == 200
+            puts "Location has been updated to #{lon}, #{lat}" if @logs_enabled
+          else
+            puts result['error'] if @logs_enabled
+          end
+        end
+      end
+
       protected
 
       def like_from_user_id(user_id)

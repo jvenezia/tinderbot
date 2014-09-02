@@ -56,6 +56,12 @@ module Tinderbot
         tinder_bot.like_recommended_users
       end
 
+      desc 'location', 'Update location using latitude and longtude. e.g. tinderbot loc 40.7313029,-73.9884189'
+      def loc(location)
+        tinder_client = sign_in
+        tinder_client.update_location(location)
+      end
+
       private
 
       def sign_in

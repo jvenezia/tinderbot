@@ -101,4 +101,19 @@ describe Tinderbot::Tinder::Client do
 
     it { tinder_client.send_message user_id, message }
   end
+
+  describe '.update_location' do
+    location = "40.7313029,-73.9884189"
+    lat_lon = location.split(',')
+
+    let(:lat) { lat_lon[0] }
+    let(:lon) { lat_lon[1] }
+    let(:response) { JSON.parse('{"status":200}') }
+
+
+    before { expect(connection).to receive(:post).with('user/ping', {lat: lat, lon: lon}) }
+    before { expect(connection).to receive(:body).and_return(response) }
+
+    subject { tinder_client.update_location location }
+  end
 end
