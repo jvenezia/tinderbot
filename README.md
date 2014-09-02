@@ -35,7 +35,7 @@ Tinderbot also provides a script to get your facebook credentials.
 facebook_email = 'your facebook email'
 facebook_password = 'your facebook password'
 
-facebook_authentication_token, facebook_user_id = Tinderbot::Facebook.get_credentials(facebook_email, facebook_password)
+facebook_authentication_token, facebook_user_id = Tinderbot::Facebook.get_credentials facebook_email, facebook_password
 ```
 
 ## Usage
@@ -47,7 +47,7 @@ facebook_authentication_token = 'your facebook authentication token'
 facebook_user_id = 'your facebook user id'
 
 tinder_client = Tinderbot::Client.new
-tinder_authentication_token = tinder_client.get_authentication_token(facebook_authentication_token, facebook_user_id)
+tinder_authentication_token = tinder_client.get_authentication_token facebook_authentication_token, facebook_user_id
 tinder_client.sign_in tinder_authentication_token
 ```
 
@@ -68,15 +68,15 @@ users = tinder_client.recommended_users #=> returns an array of Tinderbot::Model
 
 tinder_client.updates #=> {...} original json from tinder's API
 
-tinder_client.send_message(user_id, message)
+tinder_client.send_message user_id, message
 
-tinder_client.update_location('40.7313029,-73.9884189')
+tinder_client.update_location '40.7313029,-73.9884189'
 
 # you can provide a user instance or a user id to like or dislike users
-tinder_client.like(user)
-tinder_client.like(user.id)
-tinder_client.dislike(user)
-tinder_client.dislike(user.id)
+tinder_client.like user
+tinder_client.like user.id
+tinder_client.dislike user
+tinder_client.dislike user.id
 ```
 
 ### Using the bot
@@ -91,16 +91,16 @@ You can interact with Tinderbot with command lines.
 ```
 > tinderbot
 Commands:
-  tinderbot autolike              # Automatically like recommended people (Stops when there is no more people to like)
-  tinderbot dislike USER_ID       # Dislike user
-  tinderbot help [COMMAND]        # Describe available commands or one specific command
-  tinderbot like USER_ID          # Like user
-  tinderbot location              # Update location using latitude and longitude. e.g. tinderbot location 40.7313029,-73.9884189
-  tinderbot profile               # Get your profile data
-  tinderbot recommended           # Get recommended users
-  tinderbot send USER_ID MESSAGE  # Send message to user
-  tinderbot updates               # Get updates
-  tinderbot user USER_ID          # Get user profile data
+  tinderbot autolike                     # Automatically like recommended people (Stops when there is no more people to like)
+  tinderbot dislike USER_ID              # Dislike user
+  tinderbot help [COMMAND]               # Describe available commands or one specific command
+  tinderbot like USER_ID                 # Like user
+  tinderbot location ALTITUDE,LONGITUDE  # Update location using latitude and longitude, e.g. tinderbot location 40.7313029,-73.9884189
+  tinderbot profile                      # Get your profile data
+  tinderbot recommended                  # Get recommended users
+  tinderbot send USER_ID MESSAGE         # Send message to user
+  tinderbot updates                      # Get updates
+  tinderbot user USER_ID                 # Get user profile data
 ```
 
 ## Contributing
