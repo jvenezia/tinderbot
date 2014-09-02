@@ -69,6 +69,8 @@ tinder_client.updates #=> {...} original json from tinder's API
 
 tinder_client.send_message(user_id, message)
 
+tinder_client.update_location('40.7313029,-73.9884189')
+
 # you can provide a user instance or a user id to like or dislike users
 tinder_client.like(user)
 tinder_client.like(user.id)
@@ -92,6 +94,7 @@ Commands:
   tinderbot dislike USER_ID       # Dislike user
   tinderbot help [COMMAND]        # Describe available commands or one specific command
   tinderbot like USER_ID          # Like user
+  tinderbot location              # Update location using latitude and longitude. e.g. tinderbot location 40.7313029,-73.9884189
   tinderbot profile               # Get your profile data
   tinderbot recommended           # Get recommended users
   tinderbot send USER_ID MESSAGE  # Send message to user

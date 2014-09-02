@@ -47,6 +47,12 @@ module Tinderbot
         puts tinder_client.send_message user_id, message
       end
 
+      desc 'location', 'Update location using latitude and longitude. e.g. tinderbot location 40.7313029,-73.9884189'
+      def location(location)
+        tinder_client = sign_in
+        tinder_client.update_location(location)
+      end
+
       desc 'autolike', 'Automatically like recommended people (Stops when there is no more people to like)'
       def autolike
         tinder_client = sign_in
@@ -54,12 +60,6 @@ module Tinderbot
         puts 'Starting likes...'
         tinder_bot = Tinderbot::Tinder::Bot.new tinder_client
         tinder_bot.like_recommended_users
-      end
-
-      desc 'location', 'Update location using latitude and longtude. e.g. tinderbot loc 40.7313029,-73.9884189'
-      def loc(location)
-        tinder_client = sign_in
-        tinder_client.update_location(location)
       end
 
       private

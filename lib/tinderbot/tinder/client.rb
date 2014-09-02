@@ -62,20 +62,19 @@ module Tinderbot
       end
 
       def update_location(location)
-        lat_lon = location.split(',')
+        latitude = location.split(',')[0]
+        longitude = location.split(',')[1]
 
-        if lat_lon.length != 2
-          puts 'Invalid location provided'
-        else
-          lat = lat_lon[0]
-          lon = lat_lon[1]
-          result = JSON.parse(@connection.post('user/ping', {lat: lat, lon: lon}).body)
+        if latitude && longitude
+          result = JSON.parse(@connection.post('user/ping', {lat: latitude, lon: longitude}).body)
 
           if result['status'] == 200
-            puts "Location has been updated to #{lon}, #{lat}" if @logs_enabled
+            puts "Location has been updated to #{location}" if @logs_enabled
           else
             puts result['error'] if @logs_enabled
           end
+        else
+          raise Tinderbot::Error, 'Invalid location provided'
         end
       end
 

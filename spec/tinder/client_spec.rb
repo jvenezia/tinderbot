@@ -103,17 +103,24 @@ describe Tinderbot::Tinder::Client do
   end
 
   describe '.update_location' do
-    location = "40.7313029,-73.9884189"
-    lat_lon = location.split(',')
+    context 'location is correct' do
+      let(:location) { '40.7313029,-73.9884189' }
+      let(:latitude) { location.split(',')[0] }
+      let(:longitude) { location.split(',')[1] }
+      let(:response) { '{"status":200}' }
 
-    let(:lat) { lat_lon[0] }
-    let(:lon) { lat_lon[1] }
-    let(:response) { JSON.parse('{"status":200}') }
+      before { expect(connection).to receive(:post).with('user/ping', {lat: latitude, lon: longitude}).and_return(connection) }
+      before { expect(connection).to receive(:body).and_return(response) }
 
+      it { tinder_client.update_location location }
+    end
 
-    before { expect(connection).to receive(:post).with('user/ping', {lat: lat, lon: lon}) }
-    before { expect(connection).to receive(:body).and_return(response) }
+    context 'one location is missing' do
+      let(:location) { '40.7313029' }
 
-    subject { tinder_client.update_location location }
+      before { expect(connection).not_to receive(:post) }
+
+      it { expect(-> { tinder_client.update_location location }).to raise_error(Tinderbot::Error) }
+    end
   end
 end
