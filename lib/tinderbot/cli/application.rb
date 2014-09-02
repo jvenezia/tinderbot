@@ -47,7 +47,7 @@ module Tinderbot
         puts tinder_client.send_message user_id, message
       end
 
-      desc 'location ALTITUDE,LONGITUDE', 'Update location using latitude and longitude. e.g. tinderbot location 40.7313029,-73.9884189'
+      desc 'location ALTITUDE,LONGITUDE', 'Update location using latitude and longitude, e.g. tinderbot location 40.7313029,-73.9884189'
       def location(location)
         tinder_client = sign_in
         tinder_client.update_location(location)
