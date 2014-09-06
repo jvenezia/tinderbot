@@ -32,7 +32,8 @@ module Tinderbot
     end
 
     def recommended_users
-      JSON.parse(@connection.post('user/recs').body)['results'].map { |r| Tinderbot::Model::User.build_from_tinder_json r }
+      json_results = JSON.parse(@connection.post('user/recs').body)['results']
+      json_results.map { |r| Tinderbot::Model::User.build_from_tinder_json r } if json_results
     end
 
     def like(user_or_user_id)

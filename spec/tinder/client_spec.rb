@@ -46,13 +46,23 @@ describe Tinderbot::Client do
 
   describe '.recommended_users' do
     let(:recommended_users_tinder_raw_json) { open('spec/fixtures/recommended_users.json').read }
-
+    
     before { expect(connection).to receive(:post).with('user/recs').and_return(connection) }
     before { expect(connection).to receive(:body).and_return(recommended_users_tinder_raw_json) }
-
+    
     subject { tinder_client.recommended_users }
+    
+    context 'with recommended_users' do 
+      let(:recommended_users_tinder_raw_json) { open('spec/fixtures/recommended_users.json').read }
 
-    it { should eq JSON.parse(recommended_users_tinder_raw_json)['results'].map { |r| Tinderbot::Model::User.build_from_tinder_json r } }
+      it { should eq JSON.parse(recommended_users_tinder_raw_json)['results'].map { |r| Tinderbot::Model::User.build_from_tinder_json r } }
+    end
+
+    context 'with timeout from tinder API' do 
+      let(:recommended_users_tinder_raw_json) { open('spec/fixtures/timeout_recommended_users.json').read }
+
+      it { should be nil } 
+    end
   end
 
   describe '.like' do
