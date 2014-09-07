@@ -82,7 +82,7 @@ tinder_client.dislike user.id
 ### Using the bot
 Tinderbot provides a simple bot which automatically likes all recommended people. It stops when there is no more recommended people.
 ```ruby
-tinder_bot = Tinderbot::Tinder::Bot.new tinder_client
+tinder_bot = Tinderbot::Bot.new tinder_client
 tinder_bot.like_recommended_users
 ```
 
