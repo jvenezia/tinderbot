@@ -85,9 +85,18 @@ module Tinderbot
       end
 
       def get_facebook_credentials
-        puts 'Enter your facebook credentials.'
-        facebook_email = ask('Email:')
-        facebook_password = ask('Password (typing will be hidden):', echo: false)
+        unless ENV["FACEBOOK_EMAIL"]
+          puts 'Enter your facebook credentials.'
+          facebook_email = ask('Email:')
+        else
+          facebook_email = ENV["FACEBOOK_EMAIL"]
+	end
+
+        unless ENV["FACEBOOK_PASSWORD"]
+          facebook_password = ask('Password (typing will be hidden):', echo: false)
+        else
+          facebook_password = ENV["FACEBOOK_PASSWORD"]
+	end
         puts "\n"
 
         puts 'Getting your facebook authentication token...'
