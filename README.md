@@ -53,12 +53,12 @@ tinder_client.sign_in tinder_authentication_token
 
 ### Interacting with the Tinder API
 ```ruby
-user = tinder_client.profile #=> returns an instance of Tinderbot::Tinder::Models::User
+user = tinder_client.profile #=> returns an instance of Tinderbot::Model::User
 user.original_tinder_json #=> {...} original json from tinder's API
 user.id #=> 1234
 user.name #=> 'Bob'
 user.bio #=> 'I am awesome'
-user.birth_date #=> #<Date: 2014-05-01> 
+user.birth_date #=> #<Date: 2014-05-01>
 user.gender #=> :male (or :female)
 user.photo_urls #=> ['http://photo_1_url.jpg', 'http://photo_2_url.jpg']
 
