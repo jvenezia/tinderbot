@@ -6,54 +6,63 @@ module Tinderbot
       FACEBOOK_CREDENTIALS_FILE = 'facebook_credentials.pstore'
 
       desc 'profile', 'Get your profile data'
+
       def profile
         tinder_client = sign_in
         puts tinder_client.profile.to_yaml
       end
 
       desc 'user USER_ID', 'Get user profile data'
+
       def user(user_id)
         tinder_client = sign_in
         puts tinder_client.user(user_id).to_yaml
       end
 
       desc 'updates', 'Get updates'
+
       def updates
         tinder_client = sign_in
         puts tinder_client.updates.to_yaml
       end
 
       desc 'recommended', 'Get recommended users'
+
       def recommended
         tinder_client = sign_in
         puts tinder_client.recommended_users.to_yaml
       end
 
       desc 'like USER_ID', 'Like user'
+
       def like(user_id)
         tinder_client = sign_in
         tinder_client.like user_id
       end
 
       desc 'dislike USER_ID', 'Dislike user'
+
       def dislike(user_id)
         tinder_client = sign_in
         tinder_client.dislike user_id
       end
 
       desc 'send USER_ID MESSAGE', 'Send message to user'
+
       def send(user_id, message)
         tinder_client = sign_in
         puts tinder_client.send_message user_id, message
       end
 
       desc 'location ALTITUDE,LONGITUDE', 'Update location using latitude and longitude, e.g. tinderbot location 40.7313029,-73.9884189'
+
       def location(location)
         tinder_client = sign_in
         tinder_client.update_location(location)
       end
 
       desc 'autolike', 'Automatically like recommended people (Stops when there is no more people to like)'
+
       def autolike
         tinder_client = sign_in
 
@@ -85,20 +94,20 @@ module Tinderbot
       end
 
       def get_facebook_credentials
-        unless ENV["FACEBOOK_EMAIL"]
+        if ENV['FACEBOOK_EMAIL']
+          facebook_email = ENV['FACEBOOK_EMAIL']
+        else
           puts 'Enter your facebook credentials.'
           facebook_email = ask('Email:')
-        else
-          facebook_email = ENV["FACEBOOK_EMAIL"]
-	end
+        end
 
-        unless ENV["FACEBOOK_PASSWORD"]
+        if ENV['FACEBOOK_PASSWORD']
+          facebook_password = ENV['FACEBOOK_PASSWORD']
+        else
           facebook_password = ask('Password (typing will be hidden):', echo: false)
-        else
-          facebook_password = ENV["FACEBOOK_PASSWORD"]
-	end
-        puts "\n"
+        end
 
+        puts "\n"
         puts 'Getting your facebook authentication token...'
         facebook_authentication_token, facebook_user_id = Tinderbot::Facebook.get_credentials(facebook_email, facebook_password)
         return facebook_authentication_token, facebook_user_id
