@@ -103,6 +103,25 @@ describe Tinderbot::Client do
     end
   end
 
+  describe '.remove' do
+    context 'from user id' do
+      let(:user_id) { 'user_id' }
+
+      before { expect(connection).to receive(:delete).with("user/matches/#{user_id}") }
+
+      it { tinder_client.remove user_id }
+    end
+
+    context 'from user model' do
+      let(:user_tinder_json) { JSON.parse(open('spec/fixtures/user.json').read)['results'] }
+      let(:user) { Tinderbot::Model::User.build_from_tinder_json user_tinder_json }
+
+      before { expect(connection).to receive(:delete).with("user/matches/#{user.id}") }
+
+      it { tinder_client.remove user }
+    end
+  end
+
   describe '.send_message' do
     let(:user_id) { 'user_id' }
     let(:message) { 'message' }

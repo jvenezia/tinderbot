@@ -47,6 +47,13 @@ module Tinderbot
         tinder_client.dislike user_id
       end
 
+      desc 'remove USER_ID', 'Remove previously liked user'
+
+      def remove(user_id)
+        tinder_client = sign_in
+        tinder_client.remove user_id
+      end
+
       desc 'send USER_ID MESSAGE', 'Send message to user'
 
       def send(user_id, message)

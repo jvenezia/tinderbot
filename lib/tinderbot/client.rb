@@ -56,6 +56,16 @@ module Tinderbot
       end
     end
 
+    def remove(user_or_user_id)
+      if user_or_user_id.is_a? Tinderbot::Model::User
+        remove_from_user_id(user_or_user_id.id)
+        puts "Removed #{user_or_user_id.id} (#{user_or_user_id.name})" if @logs_enabled
+      else
+        remove_from_user_id(user_or_user_id)
+        puts "Removed #{user_or_user_id}" if @logs_enabled
+      end
+    end
+
     def send_message(user_id, message)
       @connection.post("user/matches/#{user_id}", {message: message})
       puts "Sent message to #{user_id}" if @logs_enabled
@@ -86,6 +96,10 @@ module Tinderbot
 
     def dislike_from_user_id(user_id)
       @connection.get "pass/#{user_id}"
+    end
+
+    def remove_from_user_id(user_id)
+      @connection.delete "user/matches/#{user_id}"
     end
 
     def build_connection

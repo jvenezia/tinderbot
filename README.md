@@ -98,6 +98,7 @@ Commands:
   tinderbot location ALTITUDE,LONGITUDE  # Update location using latitude and longitude, e.g. tinderbot location 40.7313029,-73.9884189
   tinderbot profile                      # Get your profile data
   tinderbot recommended                  # Get recommended users
+  tinderbot remove USER_ID               # Remove previously liked user
   tinderbot send USER_ID MESSAGE         # Send message to user
   tinderbot updates                      # Get updates
   tinderbot user USER_ID                 # Get user profile data
