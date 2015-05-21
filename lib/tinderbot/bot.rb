@@ -8,7 +8,7 @@ module Tinderbot
 
     def like_recommended_users
       recommended_users = @client.recommended_users
-      while recommended_users
+      until recommended_users.empty?
         recommended_users.each { |user| @client.like user }
         recommended_users = @client.recommended_users
       end
