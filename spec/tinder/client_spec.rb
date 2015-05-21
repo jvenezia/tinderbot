@@ -68,14 +68,14 @@ describe Tinderbot::Client do
       context 'there is only limit reached users' do
         let(:recommended_users_tinder_raw_json) { open('spec/fixtures/recommended_users_with_all_limit_reached.json').read }
 
-        it { should eq nil }
+        it { should eq [] }
       end
     end
 
     context 'with timeout from tinder API' do
       let(:recommended_users_tinder_raw_json) { open('spec/fixtures/timeout_recommended_users.json').read }
 
-      it { should be nil }
+      it { should eq [] }
     end
   end
 

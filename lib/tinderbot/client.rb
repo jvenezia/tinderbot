@@ -34,7 +34,7 @@ module Tinderbot
     def recommended_users
       json_results = JSON.parse(@connection.post('user/recs').body)['results']
       users = json_results.select { |r| r['name'] != 'Tinder Team' }.map { |r| Tinderbot::Model::User.build_from_tinder_json r } if json_results
-      users.empty? ? nil : users
+      users || []
     end
 
     def like(user_or_user_id)
