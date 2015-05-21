@@ -75,8 +75,12 @@ tinder_client.update_location '40.7313029,-73.9884189'
 # you can provide a user instance or a user id to like or dislike users
 tinder_client.like user
 tinder_client.like user.id
+
 tinder_client.dislike user
 tinder_client.dislike user.id
+
+tinder_client.remove user
+tinder_client.remove user.id
 ```
 
 ### Using the bot
