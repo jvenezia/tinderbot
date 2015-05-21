@@ -46,22 +46,36 @@ describe Tinderbot::Client do
 
   describe '.recommended_users' do
     let(:recommended_users_tinder_raw_json) { open('spec/fixtures/recommended_users.json').read }
-    
+
     before { expect(connection).to receive(:post).with('user/recs').and_return(connection) }
     before { expect(connection).to receive(:body).and_return(recommended_users_tinder_raw_json) }
-    
+
     subject { tinder_client.recommended_users }
-    
-    context 'with recommended_users' do 
+
+    context 'with recommended_users' do
       let(:recommended_users_tinder_raw_json) { open('spec/fixtures/recommended_users.json').read }
 
       it { should eq JSON.parse(recommended_users_tinder_raw_json)['results'].map { |r| Tinderbot::Model::User.build_from_tinder_json r } }
     end
 
-    context 'with timeout from tinder API' do 
+    context 'limit is reached' do
+      context 'there is still users in the result' do
+        let(:recommended_users_tinder_raw_json) { open('spec/fixtures/recommended_users_with_one_limit_reached.json').read }
+
+        it { should eq [Tinderbot::Model::User.build_from_tinder_json(JSON.parse(recommended_users_tinder_raw_json)['results'][0])] }
+      end
+
+      context 'there is only limit reached users' do
+        let(:recommended_users_tinder_raw_json) { open('spec/fixtures/recommended_users_with_all_limit_reached.json').read }
+
+        it { should eq nil }
+      end
+    end
+
+    context 'with timeout from tinder API' do
       let(:recommended_users_tinder_raw_json) { open('spec/fixtures/timeout_recommended_users.json').read }
 
-      it { should be nil } 
+      it { should be nil }
     end
   end
 

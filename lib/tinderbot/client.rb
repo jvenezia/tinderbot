@@ -33,8 +33,8 @@ module Tinderbot
 
     def recommended_users
       json_results = JSON.parse(@connection.post('user/recs').body)['results']
-      json_results = json_results.map { |r| Tinderbot::Model::User.build_from_tinder_json r unless r['name'] == 'Tinder Team'}.compact if json_results
-      (json_results.empty? if json_results) ? nil : json_results
+      users = json_results.select { |r| r['name'] != 'Tinder Team' }.map { |r| Tinderbot::Model::User.build_from_tinder_json r } if json_results
+      users.empty? ? nil : users
     end
 
     def like(user_or_user_id)
